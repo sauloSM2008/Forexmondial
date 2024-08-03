@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Sinais Forex</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-top: 70px; /* Espaço adicional para o botão fixo */
+            color: #555;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            position: fixed;
+            top: 20px;
+            z-index: 1000;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .signal {
+            margin: 10px 0;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        .signal.green {
+            border-left: 5px solid #28a745;
+        }
+        .signal.red {
+            border-left: 5px solid #dc3545;
+        }
+        .history {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+        .history h2 {
+            color: #555;
+        }
+        
+        .btn {
+          position: fixed;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn" onclick="generateSignal()">Gerar Sinal</button>
+    <h1>FOREX SIGNAL</h1>
+    <div id="signals"></div>
+    <div class="history">
+        <h2>Histórico de Sinais</h2>
+        <div id="history"></div>
+    </div>
+<script>
+  // Check if the user has visited index.html before
+  if (!localStorage.getItem('visitedIndex')) {
+    window.location.href = 'index.html';
+  }
+</script>
+    <script>
+        // Check if the user has visited index.html before
+        
+
+        function getRandomMinute() {
+            return Math.floor(Math.random() * 60);
+        }
+
+        function getRandomAction() {
+            return Math.random() < 0.5 ? 'CALL' : 'PUTT';
+        }
+
+        function addMinutes(date, minutes) {
+            return new Date(date.getTime() + minutes * 60000);
+        }
+
+        function formatTime(date) {
+            let hours = date.getHours().toString().padStart(2, '0');
+            let minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+
+        function generateSignal() {
+            let now = new Date();
+            let randomMinute2 = getRandomMinute();
+            let randomMinute1 = (randomMinute2 + 55) % 60; // Garantir diferença de 5 minutos atrasados
+
+            let action = getRandomAction();
+
+            let expiration1 = new Date(now);
+            expiration1.setMinutes(randomMinute1);
+            let expiration1Time = formatTime(expiration1);
+
+            let expiration2 = new Date(now);
+            expiration2.setMinutes(randomMinute2);
+            let expiration2Time = formatTime(expiration2);
+
+            let gale1 = addMinutes(expiration2, 5);
+            let gale1Time = formatTime(gale1);
+
+            let gale2 = addMinutes(gale1, 5);
+            let gale2Time = formatTime(gale2);
+
+            let signal = `
+                <div class="signal ${action === 'CALL' ? 'green' : 'red'}">
+                    <div><strong>5 minutos de expiração</strong></div>
+                    <div>GBP/USD; ${now.getHours()}:${randomMinute1}; ${action}</div>
+                    <div>Tempo para ${expiration2Time}</div>
+                    <div>1⁰ GALE —> Tempo para ${gale1Time}</div>
+                    <div>2⁰ GALE —> Tempo para ${gale2Time}</div>
+                </div>
+            `;
+
+            document.getElementById('signals').innerHTML = signal;
+            document.getElementById('history').innerHTML += signal;
+        }
+    </script>
+</body>
+</html>

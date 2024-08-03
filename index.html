@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Forex Signals</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            color: #555;
+        }
+
+        .slogan {
+            color: #777;
+            font-style: italic;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Forex Signals</h1>
+        <p class="slogan">Melhorando suas negociações com sinais precisos!</p>
+        <div class="form-container">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Senha" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Não tem uma conta? <a href="package.html">Registre-se aqui</a></p>
+            <a href="https://qxbroker.com/">See bot broker</a>
+            
+        </div>
+    </div>
+    
+    <script>
+      
+      // Set the visited flag in localStorage
+        localStorage.setItem('visitedIndex', 'true');
+    </script>
+
+    <!-- Import Firebase and initialize the app -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA3jhcnYF52SIRm14wd1CujQ7d0C1pvEjk",
+            authDomain: "forex-3a2ca.firebaseapp.com",
+            databaseURL: "https://forex-3a2ca-default-rtdb.firebaseio.com",
+            projectId: "forex-3a2ca",
+            storageBucket: "forex-3a2ca.appspot.com",
+            messagingSenderId: "706437143741",
+            appId: "1:706437143741:web:d6cc604801ab7bfbcd6bd4"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    window.location.href = "forex.html";
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(`Erro: ${errorMessage}`);
+                });
+        });
+    </script>
+</body>
+</html>
