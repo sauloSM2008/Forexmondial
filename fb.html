@@ -50,6 +50,12 @@
     </style>
 </head>
 <body>
+    <script>
+  // Check if the user has visited index.html before
+  if (!localStorage.getItem('visitedIndex')) {
+    window.location.href = 'index.html';
+  }
+</script>
     <div class="container">
         <h1>Escolha o bot</h1>
         <a href="foxroul.html" class="button">Mercado Forex</a>
