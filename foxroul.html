@@ -83,7 +83,12 @@
         <button onclick="generateSignal()">Generate Signal</button>
         <div id="history" class="history"></div>
     </div>
-
+<script>
+  // Check if the user has visited index.html before
+  if (!localStorage.getItem('visitedIndex')) {
+    window.location.href = 'index.html';
+  }
+</script>
     <script>
         function getRandomValue() {
             const min = 2242;
