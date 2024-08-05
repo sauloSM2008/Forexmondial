@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Signals for XAU/USD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            overflow-y: auto;
+            max-height: 90vh; /* Ajusta a altura máxima para evitar overflow */
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .signal {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .history {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .history-item {
+            margin-bottom: 50px; /* Aumenta a distância entre os sinais */
+            border: 2px solid #007bff; /* Adiciona borda visível */
+            border-radius: 8px; /* Bordas arredondadas */
+            padding: 20px;
+            background: #f9f9f9; /* Cor de fundo leve para contraste */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
+        }
+        .signal-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .signal-details {
+            font-size: 16px;
+            display: flex;
+            flex-direction: column; /* Organiza os detalhes verticalmente */
+        }
+        .timestamp {
+            font-size: 14px;
+            color: #888;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Forex Signals for XAU/USD</h1>
+        <div id="signal" class="signal"></div>
+        <button onclick="generateSignal()">Generate Signal</button>
+        <div id="history" class="history"></div>
+    </div>
+
+    <script>
+        function getRandomValue() {
+            const min = 2242;
+            const max = 2563;
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function getFutureTimestamp() {
+            const now = new Date();
+            let futureMinute = now.getMinutes() + Math.floor(Math.random() * (60 - now.getMinutes() + 1)) + 1;
+            const futureHour = now.getHours() + Math.floor(futureMinute / 60);
+            futureMinute = futureMinute % 60;
+            return `${now.toDateString()} ${futureHour.toString().padStart(2, '0')}:${futureMinute.toString().padStart(2, '0')}`;
+        }
+
+        function generateSignal() {
+            const signals = ["Buy", "Sell"];
+            const signal = signals[Math.floor(Math.random() * signals.length)];
+            const tp1 = getRandomValue();
+            const tp2 = getRandomValue();
+            const tp3 = getRandomValue();
+            const sel = getRandomValue();
+
+            const signalTitle = signal;
+            const signalDetails = `
+                <div>⬜TP: ${tp1}</div>
+                <div>⬜TP: ${tp2}</div>
+                <div>⬜TP: ${tp3}</div>
+                <div>✖️SL: ${sel}</div>
+            `;
+            const timestamp = getFutureTimestamp();
+            document.getElementById('signal').innerHTML = `
+                <div class="signal-title">${signalTitle}</div>
+                <div class="signal-details">${signalDetails}</div>
+                <div class="timestamp">Generated at: ${timestamp}</div>
+            `;
+
+            const historyItem = document.createElement('div');
+            historyItem.className = 'history-item';
+            historyItem.innerHTML = `
+                <div class="signal-title">${signalTitle}</div>
+                <div class="signal-details">${signalDetails}</div>
+                <div class="timestamp">Generated at: ${timestamp}</div>
+            `;
+
+            document.getElementById('history').prepend(historyItem);
+        }
+
+        // Generate the first signal on page load
+        generateSignal();
+    </script>
+</body>
+</html>
