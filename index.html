@@ -23,6 +23,7 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             width: 300px;
+            position: relative;
         }
 
         h1 {
@@ -72,10 +73,26 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .curiosity-image {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .curiosity-image:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="forex.jpng" alt="Curiosity Image" class="curiosity-image">
         <h1>Forex Signals</h1>
         <p class="slogan">Melhorando suas negociações com sinais precisos!</p>
         <div class="form-container">
@@ -86,14 +103,11 @@
                 <button type="submit">Login</button>
             </form>
             <p>Não tem uma conta? <a href="package.html">Registre-se aqui</a></p>
-            
-            
         </div>
     </div>
     
     <script>
-      
-      // Set the visited flag in localStorage
+        // Set the visited flag in localStorage
         localStorage.setItem('visitedIndex', 'true');
     </script>
 
@@ -107,7 +121,7 @@
             authDomain: "forex-3a2ca.firebaseapp.com",
             databaseURL: "https://forex-3a2ca-default-rtdb.firebaseio.com",
             projectId: "forex-3a2ca",
-            storageBucket: "forex-3a2ca.appspot.com",
+            storageBucket: "forex-3a2ca",
             messagingSenderId: "706437143741",
             appId: "1:706437143741:web:d6cc604801ab7bfbcd6bd4"
         };
@@ -134,4 +148,4 @@
         });
     </script>
 </body>
-</html>
+        </html>
